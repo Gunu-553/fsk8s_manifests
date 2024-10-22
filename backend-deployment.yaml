@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: gitops-backend
-        image: gitops-backend:13 # Image for the container
+        image: adrf968/gitops-backend:13 # Image for the container
         ports:
         - containerPort: 3000 # Port exposed by the container
         env:

@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: gitops-frontend
-        image: gitops-frontend:13
+        image: adrf968/gitops-frontend:13
         ports:
         - containerPort: 5173
         env:
