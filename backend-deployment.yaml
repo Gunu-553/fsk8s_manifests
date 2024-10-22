@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       app: gitops-backend
-  replicas: 3
+  replicas: 3 # Number of pod replicas
   strategy:
     rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      maxSurge: 25% # Allows up to 25% more pods than desired during updates
+      maxUnavailable: 25% # Allows up to 25% of pods to be unavailable during updates
+    type: RollingUpdate # Update strategy
   template:
     metadata:
       labels:
@@ -22,17 +22,17 @@ spec:
     spec:
       containers:
       - name: gitops-backend
-        image: gitops-backend:2
+        image: gitops-backend:13 # Image for the container
         ports:
-        - containerPort: 3000
+        - containerPort: 3000 # Port exposed by the container
         env:
         - name: DB_USER
-          value: "admin"
+          value: "admin" # Database username
         - name: DB_PASSWORD
-          value: "12345"
+          value: "12345" # Database password (consider using Secrets)
         - name: DB_SERVER
-          value: "35.202.61.150"
+          value: "wordpress-mysql.default.svc.cluster.local" # DNS name of the MySQL service
         - name: DB_DATABASE
-          value: "user"
+          value: "user" # Name of the database to connect to
         - name: DB_PORT
-          value: "3306"
+          value: "3306" # Port for the database connection
