@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitops-frontend
+  namespace: default
+  labels:
+    app: gitops-frontend
+spec:
+  selector:
+    app: gitops-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5173
+  type: LoadBalancer

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-backend
+  namespace: default
+  labels:
+    app: gitops-backend
+spec:
+  selector:
+    matchLabels:
+      app: gitops-backend
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gitops-backend
+    spec:
+      containers:
+      - name: gitops-backend
+        image: gitops-backend:2
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_USER
+          value: "admin"
+        - name: DB_PASSWORD
+          value: "12345"
+        - name: DB_SERVER
+          value: "35.202.61.150"
+        - name: DB_DATABASE
+          value: "user"
+        - name: DB_PORT
+          value: "3306"

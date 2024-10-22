@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-frontend
+  namespace: default
+  labels:
+    app: gitops-frontend
+spec:
+  selector:
+    matchLabels:
+      app: gitops-frontend
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gitops-frontend
+    spec:
+      containers:
+      - name: gitops-frontend
+        image: gitops-frontend:4
+        ports:
+        - containerPort: 5173
+        env:
+        - name: VITE_API_URL
+          value: ""
+
+
